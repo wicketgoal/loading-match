@@ -3,110 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live Match - Starting Soon</title>
+  <title>Match Starting Soon</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
+    /* ===== GLOBAL STYLES ===== */
     body {
-      background: linear-gradient(135deg, #1a1a40, #0d7377);
-      color: #fff;
+      margin: 0;
       height: 100vh;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      transition: background 1s ease;
-    }
-
-    .logo {
-      width: 120px;
-      margin-bottom: 25px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e40af, #7e22ce, #f43f5e);
+      background-size: 400% 400%;
+      animation: gradientMove 8s ease infinite;
+      color: white;
+      overflow: hidden;
       text-align: center;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ===== LOGO ===== */
+    .logo {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    /* ===== TEXT AREA ===== */
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 1px;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      animation: fadeInDown 1s ease-in-out;
     }
 
     p {
-      font-size: 1em;
-      opacity: 0.8;
-      text-align: center;
+      margin-top: 15px;
+      font-size: 1.3rem;
+      color: #f1f1f1;
+      letter-spacing: 0.5px;
+      animation: fadeIn 2s ease-in-out;
     }
 
-    .fade {
-      opacity: 0;
-      transition: opacity 1s ease;
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .hidden {
-      display: none;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    .video-container {
+    /* ===== ANIMATED RING ===== */
+    .ring {
       position: absolute;
-      top: 0;
-      left: 0;
+      width: 250px;
+      height: 250px;
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      animation: spin 5s linear infinite;
+    }
+
+    .ring::before, .ring::after {
+      content: '';
+      position: absolute;
+      border: inherit;
+      border-radius: 50%;
       width: 100%;
       height: 100%;
-      background-color: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    video {
-      width: 90%;
-      height: auto;
-      border: 3px solid #0ef;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #0ef;
+    .ring::before {
+      top: -10px;
+      left: -10px;
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .ring::after {
+      top: 10px;
+      left: 10px;
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ===== LIVE BADGE ===== */
+    .live-badge {
+      background: red;
+      color: white;
+      font-weight: bold;
+      font-size: 0.9rem;
+      padding: 8px 15px;
+      border-radius: 20px;
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      box-shadow: 0 0 15px red;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); box-shadow: 0 0 15px red; }
+      to { transform: scale(1.1); box-shadow: 0 0 30px red; }
     }
   </style>
 </head>
 <body>
-  <div id="startingSoon" class="starting">
-    <img class="logo" src="https://blogger.googleusercontent.com/img/a/AVvXsEhoxpwoPC4C3SOKKQ2qhb-iDNeYGafQmJmu2CwtjzBBidp4JYJEFGjmjN4PFhO6Te5x2zNbzZlQqrBi2vaIGjNfE9qSF2VJRzEqxh9ulPnJAGdKZB5ZhB5XVIqSgZR2AHjSq4VRzb6uLdlIKJvhsl5-BxKnRocPqMYNxqJxR1AWLeNuR_jEXSP1540tqyw=s313" alt="Logo" />
-    <h1>Match Starting Soon</h1>
-    <p>Stay tuned — the live action begins shortly!</p>
-  </div>
 
-  <div id="videoPlayer" class="video-container fade hidden">
-    <video controls autoplay>
-      <source src="" type="application/x-mpegURL">
-      Your browser does not support HTML5 video.
-    </video>
-  </div>
+  <!-- Website Logo -->
+  <img class="logo" src="https://blogger.googleusercontent.com/img/a/AVvXsEhoxpwoPC4C3SOKKQ2qhb-iDNeYGafQmJmu2CwtjzBBidp4JYJEFGjmjN4PFhO6Te5x2zNbzZlQqrBi2vaIGjNfE9qSF2VJRzEqxh9ulPnJAGdKZB5ZhB5XVIqSgZR2AHjSq4VRzb6uLdlIKJvhsl5-BxKnRocPqMYNxqJxR1AWLeNuR_jEXSP1540tqyw=s313" alt="Website Logo" />
 
-  <script>
-    // Simulate match starting after 5 seconds (change as needed)
-    setTimeout(() => {
-      const startScreen = document.getElementById("startingSoon");
-      const videoPlayer = document.getElementById("videoPlayer");
-      
-      startScreen.classList.add("fade");
-      setTimeout(() => {
-        startScreen.classList.add("hidden");
-        videoPlayer.classList.remove("hidden");
-        setTimeout(() => {
-          videoPlayer.classList.remove("fade");
-        }, 100);
-      }, 1000);
-    }, 5000); // 5 seconds
-  </script>
+  <!-- Live badge -->
+  <div class="live-badge">🔴 LIVE SOON</div>
+
+  <!-- Animated ring -->
+  <div class="ring"></div>
+
+  <!-- Text content -->
+  <h1>🏏 Match Starting Soon...</h1>
+  <p>Stay tuned! The live broadcast will begin shortly.</p>
+
 </body>
 </html>
