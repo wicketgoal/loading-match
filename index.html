@@ -28,6 +28,19 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* ===== LOGO ===== */
+    .logo {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      animation: fadeIn 1s ease-in-out;
+    }
+
     /* ===== TEXT AREA ===== */
     h1 {
       font-size: 3rem;
@@ -43,16 +56,6 @@
       font-size: 1.3rem;
       color: #f1f1f1;
       letter-spacing: 0.5px;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    #countdown {
-      font-size: 2.5rem;
-      font-weight: 600;
-      margin-top: 25px;
-      letter-spacing: 2px;
-      color: #fff;
-      text-shadow: 0 0 20px rgba(255,255,255,0.4);
       animation: fadeIn 2s ease-in-out;
     }
 
@@ -125,41 +128,18 @@
 </head>
 <body>
 
+  <!-- Website Logo -->
+  <img class="logo" src="https://blogger.googleusercontent.com/img/a/AVvXsEhoxpwoPC4C3SOKKQ2qhb-iDNeYGafQmJmu2CwtjzBBidp4JYJEFGjmjN4PFhO6Te5x2zNbzZlQqrBi2vaIGjNfE9qSF2VJRzEqxh9ulPnJAGdKZB5ZhB5XVIqSgZR2AHjSq4VRzb6uLdlIKJvhsl5-BxKnRocPqMYNxqJxR1AWLeNuR_jEXSP1540tqyw=s313" alt="Website Logo" />
+
+  <!-- Live badge -->
   <div class="live-badge">🔴 LIVE SOON</div>
+
+  <!-- Animated ring -->
   <div class="ring"></div>
 
+  <!-- Text content -->
   <h1>🏏 Match Starting Soon...</h1>
-  <p id="status">Stay tuned! The live broadcast will begin shortly.</p>
-  <div id="countdown">05:00</div>
-
-  <script>
-    // === SET MATCH START TIME ===
-    // Example: 5 minutes from now
-    const matchStart = new Date().getTime() + (5 * 60 * 1000); // 5 minutes
-
-    const countdownEl = document.getElementById("countdown");
-    const statusEl = document.getElementById("status");
-    const liveBadge = document.querySelector(".live-badge");
-
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = matchStart - now;
-
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdownEl.textContent =
-        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-
-      // When countdown finishes
-      if (distance < 0) {
-        clearInterval(timer);
-        countdownEl.textContent = "LIVE NOW!";
-        statusEl.textContent = "✅ The match has started!";
-        liveBadge.textContent = "🔴 LIVE NOW";
-      }
-    }, 1000);
-  </script>
+  <p>Stay tuned! The live broadcast will begin shortly.</p>
 
 </body>
 </html>
